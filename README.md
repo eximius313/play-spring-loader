@@ -128,7 +128,7 @@ public class PersistenceContext {
   }
 }
 ```
-4. Add these properties from your `persisttence.xml` in `db.default` section of your `application.conf`:
+4. Add these properties from your `persistence.xml` in `db.default` section of your `application.conf`:
 ```
 db {
   default {
@@ -140,7 +140,7 @@ db {
     hibernate.connection.autocommit=false
   }
 ```
-5. Delete `persisttence.xml` file
+5. Delete `persistence.xml` file
 6. Annotate all of your repositories as `@Repository`
 7. Replace all `@Inject JPAApi jpaApi` with `@PersistenceContext EntityManager entityManager` and `jpaApi.em()` with `entityManager`
 8. Replace all `play.db.jpa.Transactional` with `javax.transaction.Transactional`
