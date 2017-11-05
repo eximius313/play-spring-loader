@@ -30,6 +30,7 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 import play.api._
 import play.api.inject._
 
+import scala.concurrent.Future
 import scala.collection.JavaConverters._
 import scala.reflect.ClassTag
 
@@ -181,6 +182,16 @@ abstract class SpringBuilder[Self] protected (
 
     ctx.refresh()
     ctx.start()
+
+    injector.instanceOf[ApplicationLifecycle].addStopHook { () =>
+      try {
+        ctx.close()
+        Future.successful(())
+      } catch {
+        case e: Throwable =>
+          throw new PlayException("Cannot close ApplicationContext", "ApplicationContext was not closed.", e)
+      }
+    }
 
     injector
   }

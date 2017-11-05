@@ -7,7 +7,7 @@ playBuildRepoName in ThisBuild := "play-spring-loader"
 organizationName := "Lightbend"
 startYear := Some(2017)
 
-val PlayVersion = "2.6.6"
+val PlayVersion = "2.6.11"
 val SpringVersion = "4.3.11.RELEASE"
 
 lazy val root = (project in file(".")).enablePlugins(PlayLibrary)
@@ -17,6 +17,7 @@ libraryDependencies ++= Seq(
   "org.springframework" % "spring-context" % SpringVersion,
 
   "com.typesafe.play" %% "play-java" % PlayVersion,
+  "com.typesafe.play" %% "play-test" % PlayVersion % "test",
   "com.novocode" % "junit-interface" % "0.11" % "test"
 )
 
